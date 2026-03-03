@@ -5,9 +5,8 @@
 <sub> (&dagger;Work done during an internship at NAVER AI Lab, *corresponding authors) <br>
 > [NAVER AI LAB](https://naver-career.gitbook.io/en/teams/clova-cic/ai-lab)
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/leveraging-temporal-contextualization-for/zero-shot-action-recognition-on-kinetics)](https://paperswithcode.com/sota/zero-shot-action-recognition-on-kinetics?p=leveraging-temporal-contextualization-for) \
 [![paper](https://img.shields.io/badge/arXiv-Paper-red.svg)](https://arxiv.org/abs/2404.09490)
-[![models](https://img.shields.io/badge/Link-Models-yellow.svg)](https://drive.google.com/drive/folders/1dKkzYsCCk2_hcXTcHH1ZwmyQMiLFNWqo)
+[![models](https://img.shields.io/badge/Link-Models-yellow.svg)](https://huggingface.co/byminji/TC-CLIP)
 [![video](https://img.shields.io/badge/5Min-Video-87CEEB)](https://www.youtube.com/watch?v=cI0e8nEoC6s)
 [![poster](https://img.shields.io/badge/Presentation-Poster-B762C1)](docs/tc_clip_poster_eccv2024.pdf)
 [![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white)](tc_clip_inference_demo.ipynb)
@@ -61,7 +60,7 @@ summarizing informative tokens from the entire video into _context tokens_ and l
 
 
 ## :file_folder: Models
-We use CLIP ViT-B/16 for all experiments below. All the checkpoints can be downloaded at this [link](https://drive.google.com/drive/folders/1dKkzYsCCk2_hcXTcHH1ZwmyQMiLFNWqo).
+We use CLIP ViT-B/16 for all experiments below. All the checkpoints can be downloaded at this [link](https://huggingface.co/byminji/TC-CLIP).
 * (LLM) denotes that the models are using LLM-rephrased category names from [FROSTER](https://github.com/Visual-AI/FROSTER). Note that experiments on the SSv2 dataset do not involve LLM-rephrasing. 
 * (P) denotes that the models are first pretrained on Kinetics-400 and subsequently fine-tuned on each dataset. Otherwise, models are directly fine-tuned from CLIP. See Appendix A in the paper.
 
@@ -69,8 +68,8 @@ We use CLIP ViT-B/16 for all experiments below. All the checkpoints can be downl
 
 | Scripts                                                                 |   HMDB-51    |   UCF-101    |  Kinetics-600  |                                      Ckpt                                       |
 |-------------------------------------------------------------------------|:------------:|:------------:|:--------------:|:--------------------------------------------------------------------------------:|
-| [TC-CLIP](scripts/train/zero_shot/train_tc_clip_zero_shot.sh)           |  54.2 ± 0.7  |  82.9 ± 0.6  |   75.8 ± 0.5   | [Link](https://drive.google.com/drive/folders/1gAB3LtNzVerkVerifgJFRL0WciPvrAlR) |
-| [TC-CLIP (LLM)](scripts/train/zero_shot/train_tc_clip_zero_shot_llm.sh) |  56.0 ± 0.3  |  85.4 ± 0.8  |   78.1 ± 1.0   | [Link](https://drive.google.com/drive/folders/18CWhh4MZ9EvGlJeCHpW48mEfjMTLMCSk) |
+| [TC-CLIP](scripts/train/zero_shot/train_tc_clip_zero_shot.sh)           |  54.2 ± 0.7  |  82.9 ± 0.6  |   75.8 ± 0.5   | [Link](https://huggingface.co/byminji/TC-CLIP/tree/main/zero_shot_k400) |
+| [TC-CLIP (LLM)](scripts/train/zero_shot/train_tc_clip_zero_shot_llm.sh) |  56.0 ± 0.3  |  85.4 ± 0.8  |   78.1 ± 1.0   | [Link](https://huggingface.co/byminji/TC-CLIP/tree/main/zero_shot_k400_llm) |
 
 
 #### Few-shot action recognition
@@ -78,25 +77,25 @@ We use CLIP ViT-B/16 for all experiments below. All the checkpoints can be downl
 | Scripts                                                                    |          HMDB-51          |          UCF-101          |           SSv2           |  Ckpt  |
 |----------------------------------------------------------------------------|:-------------------------:|:-------------------------:|:------------------------:|:-------------:|
 |                                                                            |  K=2 / K=4 / K=8 / K=16   |  K=2 / K=4 / K=8 / K=16   |  K=2 / K=4 / K=8 / K=16  | |
-| [TC-CLIP](scripts/train/few_shot/train_tc_clip_few_shot.sh)                | 57.3 / 62.3 / 67.3 / 68.6 | 85.9 / 89.9 / 92.5 / 94.6 |  7.3 / 8.6 / 9.3 / 14.0  |   [Link](https://drive.google.com/drive/folders/1kKSpRTQa6h2zR6uVnM8DeudnJawGuWUE)    |
-| [TC-CLIP (LLM)](scripts/train/few_shot/train_tc_clip_few_shot_llm.sh)      | 58.6 / 63.3 / 65.5 / 68.8 | 86.8 / 90.1 / 92.0 / 94.3 |  7.3 / 8.6 / 9.3 / 14.0  |   [Link](https://drive.google.com/drive/folders/1G2G9IOCxlJlmjEmg6rM0trvoOIfPhi8g)    |
-| [TC-CLIP (P)](scripts/train/few_shot/train_tc_clip_few_shot_pretrained.sh) | 65.3 / 68.5 / 71.4 / 73.0 | 94.1 / 95.6 / 96.6 / 97.3 | 8.7 / 10.1 / 12.1 / 15.2 |   [Link](https://drive.google.com/drive/folders/1WFrjiI6hcTX6cgRAnuwlBqfpSPXV4L43)    |
+| [TC-CLIP](scripts/train/few_shot/train_tc_clip_few_shot.sh)                | 57.3 / 62.3 / 67.3 / 68.6 | 85.9 / 89.9 / 92.5 / 94.6 |  7.3 / 8.6 / 9.3 / 14.0  |   [Link](https://huggingface.co/byminji/TC-CLIP/tree/main/few_shot)    |
+| [TC-CLIP (LLM)](scripts/train/few_shot/train_tc_clip_few_shot_llm.sh)      | 58.6 / 63.3 / 65.5 / 68.8 | 86.8 / 90.1 / 92.0 / 94.3 |  7.3 / 8.6 / 9.3 / 14.0  |   [Link](https://huggingface.co/byminji/TC-CLIP/tree/main/few_shot_llm)    |
+| [TC-CLIP (P)](scripts/train/few_shot/train_tc_clip_few_shot_pretrained.sh) | 65.3 / 68.5 / 71.4 / 73.0 | 94.1 / 95.6 / 96.6 / 97.3 | 8.7 / 10.1 / 12.1 / 15.2 |   [Link](https://huggingface.co/byminji/TC-CLIP/tree/main/few_shot_pretrained)    |
 
 #### Base-to-novel generalization
 
 | Scripts                                                                    |       K-400        |      HMDB-51       |      UCF-101       |        SSv2        |                                       Ckpt                                       |
 |----------------------------------------------------------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:--------------------------------------------------------------------------------:|
 |                                                                            | Base / Novel / HM  | Base / Novel / HM  | Base / Novel / HM  | Base / Novel / HM  |                                                                                  |
-| [TC-CLIP](scripts/train/few_shot/train_tc_clip_few_shot.sh)                | 78.9 / 63.6 / 70.4 | 73.3 / 54.1 / 62.2 | 95.5 / 78.0 / 85.9 | 17.5 / 13.4 / 15.2 | [Link](https://drive.google.com/drive/folders/1NWdC4EpUyR99b0OquPNGudKqrHo9S8OR) |
-| [TC-CLIP (LLM)](scripts/train/few_shot/train_tc_clip_few_shot_llm.sh)      | 79.1 / 65.4 / 71.6 | 73.3 / 59.1 / 65.5 | 95.4 / 81.6 / 88.0 | 17.5 / 13.4 / 15.2 | [Link](https://drive.google.com/drive/folders/19mEhCdzyp8Y-Ox1R1_yQPt6yUGGzJtlX) |
-| [TC-CLIP (P)](scripts/train/few_shot/train_tc_clip_few_shot_pretrained.sh) |        N/A         | 79.4 / 58.3 / 67.2 | 97.5 / 84.5 / 90.5 | 19.6 / 15.6 / 17.4 | [Link](https://drive.google.com/drive/folders/11jUZ4E1joynG26hAuzMpq8b3J9NbEHjw) |
+| [TC-CLIP](scripts/train/base2novel/train_tc_clip_base2novel.sh)                | 78.9 / 63.6 / 70.4 | 73.3 / 54.1 / 62.2 | 95.5 / 78.0 / 85.9 | 17.5 / 13.4 / 15.2 | [Link](https://huggingface.co/byminji/TC-CLIP/tree/main/base2novel) |
+| [TC-CLIP (LLM)](scripts/train/base2novel/train_tc_clip_base2novel_llm.sh)      | 79.1 / 65.4 / 71.6 | 73.3 / 59.1 / 65.5 | 95.4 / 81.6 / 88.0 | 17.5 / 13.4 / 15.2 | [Link](https://huggingface.co/byminji/TC-CLIP/tree/main/base2novel_llm) |
+| [TC-CLIP (P)](scripts/train/base2novel/train_tc_clip_base2novel_pretrained.sh) |        N/A         | 79.4 / 58.3 / 67.2 | 97.5 / 84.5 / 90.5 | 19.6 / 15.6 / 17.4 | [Link](https://huggingface.co/byminji/TC-CLIP/tree/main/base2novel_pretrained) |
 
 
 #### Fully-supervised action recognition
 
 | Scripts                                                                     | K-400 (Top-1) | K-400 (Top-5) |                                       Ckpt                                       |
 |-----------------------------------------------------------------------------|:-------------:|:-------------:|:--------------------------------------------------------------------------------:|
-| [TC-CLIP](scripts/train/fully_supervised/train_tc_clip_fully_supervised.sh) |     85.2      |     96.9      | [Link](https://drive.google.com/drive/folders/1yBrynFBqvdSnOXuY8arKWSOT5-pxdj8M) |
+| [TC-CLIP](scripts/train/fully_supervised/train_tc_clip_fully_supervised.sh) |     85.2      |     96.9      | [Link](https://huggingface.co/byminji/TC-CLIP/tree/main/fully_supervised_k400) |
 
 
 
